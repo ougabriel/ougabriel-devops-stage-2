@@ -233,6 +233,7 @@ Login details are obtained in the backend dir of the `.env` file which are usern
 
 This error means there is an issue connecting to the backend service of our application from the frontend
 When we right click on the page and select `inspect` we can see that at the console section of the developer tools `http://localhost:8000 was refused`
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/c2ec80a2-6124-41cb-b426-2883bb7206e4)
 This is because the frontend is still trying to connect to the backend database through the `localhost` address which is invalid because the app is now running on a remote server.
 This needs to be changed to the correct IP of the remote server or VM. 
 To change this; go into the `backend` dir > `ls -al` to see hidden folders > `vim` into the `.env` dir and make the changes
@@ -245,15 +246,32 @@ Before
 ![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/4a3f52c5-4323-44f9-ad71-65087b41f0cc)
 
 After
-![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/494b1e77-e0ef-4b1e-841b-e71e97312f66)
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/8c113039-4dab-42ea-81f0-a08d5ca3f01d)
+
 
 **2.5 Resolving the CORS Error issue**
 CORS stands for Cross-origin resource sharing.
 
-When we try re-login we can see a new issue.
+When we try re-login we will see a new issue, this is because the backend is not properly routed to match our remote server IP
+To do this, go into the backend folder > `ls -al` to show all content > vim into `.env` and change the details
+```bash
+cd backend
+ls -al
+vi .env
+```
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/4af655a0-2316-4bd7-9e40-3c6ca6cd8a0f)
+Changing the file
+Before
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/ec47b80a-fc75-4b2d-99ce-c9b4ea058c56)
+
+After
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/76f48ab5-d53b-46d1-90e1-dbf49993303f)
 
 
-![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/c2ec80a2-6124-41cb-b426-2883bb7206e4)
+Lets re-login into the app
+
+
+
 
 
 
