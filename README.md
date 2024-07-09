@@ -573,3 +573,15 @@ Login again
 THE END
 
 
+###STAGE 7: PUSH TO GITHUB REPO**
+Create a Repo in your github and push the new changes to it
+```bash
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ougabriel/ougabriel-hngstage2-devops.git
+git push -u origin main
+```
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/b0db21a7-1ee1-463c-9d11-3e627c8e3112)
+
