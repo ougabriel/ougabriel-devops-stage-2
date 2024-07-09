@@ -513,5 +513,63 @@ Password: changeme
 Click on Proxy host and setup the proxy for your frontend and backend
 Map your domain name to the service name of your frontend and the port the container is listening on Internally.
 
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/ca9124d4-3320-42cc-b3ba-ed3ec991287d)
+
+Click on the SSL tab and request a new certificate
+
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/a077070c-f5f4-4e9b-9816-3c73abd4956a)
+
+Now to configure the frontend to route api requests to the backend on the same domain, Click on Advanced and paste this configuration
+
+```bash
+location /api {
+    proxy_pass http://backend:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location /docs {
+    proxy_pass http://backend:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location /redoc {
+    proxy_pass http://backend:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/839bd855-57cd-47d6-ba98-a65c70110bb0)
+
+Repeat the same process for
+
+db.domain: to route to your adminer service on port 8080
+proxy.domain: to route to the proxy service UI on port 81
+
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/75aa061b-e895-4133-87ee-e6e96b1a57a1)
+
+
+**6.3 Configure Adminer**
+We can access `adminer` on the browser which is `db.<your_domain>.com`
+Using mine, this will be `db.gabdevops.mooo.com`
+
+
+**6.4 Access the frontend using domain**
+Before you login, make sure to change change the `API_URL` in your frontend `.env` to the name of your domain
+`VITE_API_URL=https://<your_domain>`
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/d0451a0f-0bd0-42e9-98f5-99ec258d8311)
+
+You would need to run `docker-compose up -d --build` to enable the changes to take effect
+Login again
+![image](https://github.com/ougabriel/ougabriel-devops-stage-2/assets/34310658/4f290690-b11e-479e-84c3-03d3deeb23fd)
+
+THE END
 
 
